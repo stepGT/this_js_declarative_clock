@@ -5,6 +5,27 @@ const log = message => console.log(message);
 
 /**
  *
+ * @param key
+ */
+const prependZero = key => clockTime =>
+    ({
+      ...clockTime,
+      [key]: (clockTime[key] < 10) ? '0' + clockTime[key] : clockTime[key]
+    });
+
+/**
+ *
+ * @param civilianTime
+ */
+const doubleDigits = civilianTime =>
+    compose(
+        prependZero('h'),
+        prependZero('m'),
+        prependZero('s')
+    )(civilianTime);
+
+/**
+ *
  * @param clockTime
  */
 const civilianHours = clockTime =>
@@ -68,6 +89,7 @@ const startTicking = () =>
             getCurrentTime,
             abstractClockTime,
             convertToCivilianTime,
+            doubleDigits,
             display(log)
         ),
         sec()
