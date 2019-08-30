@@ -5,6 +5,17 @@ const log = message => console.log(message);
 
 /**
  *
+ * @param format
+ */
+const formatClock = format =>
+        time =>
+            format.replace('hh', time.h)
+            .replace('mm', time.m)
+            .replace('ss', time.s)
+            .replace('tt', time.f);
+
+/**
+ *
  * @param key
  */
 const prependZero = key => clockTime =>
@@ -41,7 +52,7 @@ const civilianHours = clockTime =>
 const appendAMPM = clockTime =>
     ({
       ...clockTime,
-      ampm: (clockTime.h >= 12) ? 'PM' : 'AM'
+      f: (clockTime.h >= 12) ? 'PM' : 'AM'
     });
 
 /**
@@ -90,6 +101,7 @@ const startTicking = () =>
             abstractClockTime,
             convertToCivilianTime,
             doubleDigits,
+            formatClock('hh:mm:ss tt'),
             display(log)
         ),
         sec()
